@@ -1,6 +1,5 @@
 package com.dev.cTak.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.jsoup.Connection;
@@ -9,7 +8,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dev.cTak.service.ItemCrawlingService;
 import com.dev.cTak.vo.ItemVo;
@@ -23,13 +24,14 @@ public class ItemCrawlingController {
 		this.itemCrawlingService = itemCrawlingService;
 	}
 	
-	@GetMapping("/crawling")
-	public String crawling(Model model, String url) throws Exception{
-		
-		//url = "https://fromvi.com/product/detail.html?product_no=1194&cate_no=1&display_group=";
-		
+	@PostMapping("/crawling")
+	@ResponseBody
+	public ItemVo crawling(Model model, @RequestBody String url) throws Exception{
 		/**************************************************************************/
 		/**************					START						 **************/
+		url = url.replaceAll("%3A", ":");
+		url = url.replaceAll("%3F", "?");
+		url = url.replaceAll("%2F", "/");
 		
 		Jsoup.connect("https://fromvi.com").get();
 		
@@ -50,9 +52,10 @@ public class ItemCrawlingController {
 		items.setPrice1(contents.select("#span_product_price_custom").text());
 		items.setPrice2(contents.select("#span_product_price_text").text());
 		
-		
 		/**************************************************************************/
 		/**************************************************************************/
+
+		System.out.println(contents);
 		System.out.println(url);
 		System.out.println(items.getTitle());
 		System.out.println(items.getPrice1());
@@ -60,7 +63,7 @@ public class ItemCrawlingController {
 		
 		//model.addAttribute("items", itemList);
 		
-		return "items";
+		return items;
 	}
 }
  

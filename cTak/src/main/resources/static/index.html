@@ -1,365 +1,194 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>알페로 상품 크롤링</title>
-
-<style>
-	BODY {
-		WIDTH: 100%; HEIGHT: 100%; color:#666; 
-	}
-	BODY {
-		PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
-	}
-	FORM {
-		PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
-	}
-	IMG {
-		BORDER:0;
-	}
-	A IMG {
-		VERTICAL-ALIGN: middle
-	}
-	BODY {
-		LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px
-	}
-	SPAN {
-		LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px;
-	}
-	TD {
-		LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px
-	}
-	DIV {
-		LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px
-	}
-	LABEL {
-		LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px; vertical-align:middle;
-	}
-	TH {
-		LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px
-	}
-	BR {
-		LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px
-	}
-	UL {
-		LIST-STYLE-POSITION: outside; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
-	}
-	OL {
-		LIST-STYLE-POSITION: outside; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
-	}
-	LI {
-		LIST-STYLE-POSITION: outside; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
-	}
-	INPUT {
-		FONT-FAMILY: "돋움", "굴림"; font-size:12px; vertical-align:middle;
-	}
-	TEXTAREA {
-		FONT-FAMILY: "돋움", "굴림"
-	}
+	<meta charset="UTF-8">
+	<title>알페로 상품 크롤링</title>
 	
-	.textfield {
-	    border-bottom: #e3e3e3 1px solid; 
-	    border-left: #e3e3e3 1px solid; 
-	    
-	    height: 18px;
-	    border-top: #e3e3e3 1px solid; 
-	    border-right: #e3e3e3 1px solid; 
-	    padding-top: 2px;
-	    padding-bottom: 1px; 
-	}
+	<link rel="stylesheet" href="../css/index.css" />
 	
-	input[type='file']{
-	    height: 20px;
-	}
-	
-	TEXTAREA {
-		BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; BORDER-TOP: #aaaaaa 1px solid; BORDER-RIGHT: #aaaaaa 1px solid
-	}
-	A:link {
-		FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none
-	}
-	A:visited {
-		FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none
-	}
-	A:hover {
-		FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none
-	}
-	A:active {
-		FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none
-	}
-	.w1 {
-		WIDTH: 10px
-	}
-	.w2 {
-		WIDTH: 25px
-	}
-	.w3 {
-		WIDTH: 50px
-	}
-	.w4 {
-		WIDTH: 100px
-	}
-	.w5 {
-		WIDTH: 150px
-	}
-	.w6 {
-		WIDTH: 200px
-	}
-	.w7 {
-		WIDTH: 300px
-	}
-	.w8 {
-		WIDTH: 300px
-	}
-	.w9 {
-		WIDTH: 400px
-	}
-	.w10 {
-		WIDTH: 500px
-	}
-	.w100 {
-		WIDTH: 100%
-	}
-	.w90 {
-		WIDTH: 90%
-	}
-	LEGEND {
-		COLOR: #a26725; FONT-SIZE: 12px; FONT-WEIGHT: bold
-	}
-	
-	INPUT.required {
-		BORDER-BOTTOM: #77acc0 1px solid; 
-	    BORDER-LEFT: #77acc0 1px solid; 
-	    BACKGROUND-COLOR: #eff6fa; 
-	    BORDER-TOP: #77acc0 1px solid; 
-	    BORDER-RIGHT: #77acc0 1px solid
-	}
-	
-	TEXTAREA.required {
-		BORDER-BOTTOM: #77acc0 1px solid; BORDER-LEFT: #77acc0 1px solid; BACKGROUND-COLOR: #eff6fa; BORDER-TOP: #77acc0 1px solid; BORDER-RIGHT: #77acc0 1px solid
-	}
-	SELECT.required {
-		BACKGROUND-COLOR: #d9ffd9
-	}
-	.requied_comment {
-		MARGIN: 5px 2px
-	}
-	FIELDSET {
-		PADDING-LEFT: 8px
-	}
-	#popupLayer {
-		PADDING-BOTTOM: 10px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; PADDING-TOP: 10px
-	}
-	
-	#title2Layer {
-		BACKGROUND-IMAGE: url(../images/admin/icon_dot.gif); MARGIN-TOP: 10px; PADDING-LEFT: 20px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left center; MARGIN-BOTTOM: 13px; HEIGHT: 16px; FONT-SIZE: 14px; FONT-WEIGHT: bold
-	}
-	.title3Layer {
-		MARGIN-TOP: 10px; PADDING-LEFT: 20px; MARGIN-BOTTOM: 5px; FONT-SIZE: 12px; FONT-WEIGHT: bold
-	}
-	#userHeaderTopMargin {
-		MARGIN-TOP: 10px
-	}
-	#userHeaderBottomMargin {
-		MARGIN-TOP: 10px
-	}
-	#listButtonLayer {
-		TEXT-ALIGN: left; MARGIN-BOTTOM: 15px
-	}
-	#listSearchConditionLayer {
-		MARGIN-TOP: 10px
-	}
-	#listSearchConditionLayer .title {
-		FONT-WEIGHT: bold
-	}
-	#listSearchConditionLayer .row {
-		MARGIN: 3px 0px 5px 5px
-	}
-	#listSearchConditionLayer .row_empty {
-		TEXT-ALIGN: center; MARGIN: 3px 0px 5px 5px
-	}
-	#listSearchConditionLayer .item {
-		MARGIN-RIGHT: 20px
-	}
-	#listLayer {
-		MARGIN-TOP: 20px
-	}
-	#listLayer .th_left {
-		BACKGROUND-IMAGE: url(../images/admin/bg_list_th.gif); BORDER-BOTTOM: #e5e5e5 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BACKGROUND-REPEAT: repeat-x; WHITE-SPACE: nowrap; HEIGHT: 28px; COLOR: #222; FONT-SIZE: 11px; BORDER-TOP: #e5e5e5 1px solid; BORDER-RIGHT: #ede 1px solid; BORDER-LEFT: #ede 1px solid; PADDING-TOP: 2px
-	}
-	#listLayer .th_middle {
-		BACKGROUND-IMAGE: url(../images/admin/bg_list_th.gif); BORDER-BOTTOM: #e5e5e5 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BACKGROUND-REPEAT: repeat-x; WHITE-SPACE: nowrap; HEIGHT: 28px; COLOR: #222; FONT-SIZE: 11px; BORDER-TOP: #e5e5e5 1px solid; BORDER-RIGHT: #ede 1px solid; PADDING-TOP: 2px
-	}
-	#listLayer .th_right {
-		BACKGROUND-IMAGE: url(../images/admin/bg_list_th.gif); BORDER-BOTTOM: #e5e5e5 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BACKGROUND-REPEAT: repeat-x; WHITE-SPACE: nowrap; HEIGHT: 28px; COLOR: #222; FONT-SIZE: 11px; BORDER-TOP: #e5e5e5 1px solid; BORDER-RIGHT: #ede 1px solid; PADDING-TOP: 2px
-	}
-	#listLayer .th {
-		BORDER-BOTTOM: #ede 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; BACKGROUND-COLOR: #b2dbea; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; HEIGHT: 28px; COLOR: #222222; BORDER-RIGHT: #ede 1px solid; PADDING-TOP: 2px
-	}
-	#listLayer .td_left {
-		BORDER-BOTTOM: #ededed 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; WHITE-SPACE: nowrap; HEIGHT: 25px; PADDING-TOP: 2px
-	}
-	#listLayer .td_middle {
-		BORDER-BOTTOM: #ededed 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; WHITE-SPACE: nowrap; HEIGHT: 25px; PADDING-TOP: 2px
-	}
-	#listLayer .td_right {
-		BORDER-BOTTOM: #ededed 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; WHITE-SPACE: nowrap; HEIGHT: 25px; PADDING-TOP: 2px
-	}
-	.no_data_row {
-		BORDER-BOTTOM: #ededed 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; HEIGHT: 25px; PADDING-TOP: 5px
-	}
-	.center {
-		TEXT-ALIGN: center
-	}
-	#total_cnt {
-		COLOR: #ff5400
-	}
-
-	select{vertical-align:middle; height:22px;}
-	
-</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+	<form name="frm" id="frm" enctype="multipart/form-data" method="post" onsubmit="return false;" class="uk-form">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	        <tbody>
+	            <tr>
+	                <td height="41" align="left" style="font-weight:bold; font-size:15px;">
+	                    <img src="" > 쇼핑몰 상품 정보 크롤링
+	                </td>
+	            </tr>
+	            <tr>
+	                <td height="1" bgcolor="e8e8e8"></td>
+	            </tr>
+	        </tbody>
+	    </table>
+	    
+	    <br>
+	    
+	    <div id="listButtonLayer">
+	        &nbsp;<font color="#FF0000"><b> * 상품 등록작업시 먼저 5개정도 상품등록 후 수집 (가격, 품번, 사진등)내역 확인 부탁드립니다.  <br>&nbsp; *  각 브랜드별 공통이미지나 공통 제거 문구 미리알려 주시면 데이터 수집할때 제외 처리해 드리겠습니다. <br>&nbsp; *  등록 후 삭제하기 힘듭니다. </b></font> <br><br> 
+	        검색결과 : <span id="total_cnt">0</span>건
 	
-<form name="frm" id="frm" enctype="multipart/form-data" method="post" onsubmit="return false;" class="uk-form">
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tbody>
-            <tr>
-                <td height="41" align="left" style="font-weight:bold; font-size:15px;">
-                    <img src="" > 쇼핑몰 상품 정보 크롤링
-                </td>
-            </tr>
-            <tr>
-                <td height="1" bgcolor="e8e8e8"></td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <br>
-    
-    <div id="listButtonLayer">
-        &nbsp;<font color="#FF0000"><b> * 상품 등록작업시 먼저 5개정도 상품등록 후 수집 (가격, 품번, 사진등)내역 확인 부탁드립니다.  <br>&nbsp; *  각 브랜드별 공통이미지나 공통 제거 문구 미리알려 주시면 데이터 수집할때 제외 처리해 드리겠습니다. <br>&nbsp; *  등록 후 삭제하기 힘듭니다. </b></font> <br><br> 
-        검색결과 : <span id="total_cnt">0</span>건
-
-        <!--※ 등록일자 기준 내림차순 정렬됩니다.-->
-    </div>
-    
-    <div id="listSearchConditionLayer">
-        <fieldset>
-            <legend>검색조건</legend>
-            <div class="row">
-                <span class="item">
-                    <span class="title">쇼핑몰</span>
-                    <select name="tmp_shop_id" id="tmp_shop_id" readonly="" class="select2 select2-hidden-accessible" width="200" data-select2-id="select2-data-tmp_shop_id" tabindex="-1" aria-hidden="true">
-                        <option value="100101" selected="" data-select2-id="select2-data-2-81wg">프롬비아이</option>
-                        <option value="100102">아떼스타</option>
-                        <option value="100103">대상유통</option>
-                    </select>
-                    <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-1-b23x" style="width: 200px;">
-                        <span class="selection">
-                            <span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-tmp_shop_id-container" aria-controls="select2-tmp_shop_id-container">
-                                <span class="select2-selection__rendered" id="select2-tmp_shop_id-container" role="textbox" aria-readonly="true" title="프롬비아이">프롬비아이</span>
-                                <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
-                            </span>
-                        </span>
-                        <span class="dropdown-wrapper" aria-hidden="true"></span>
-                    </span>
-                </span>
-                <span class="item">
-                    <span class="title">키워드 또는 URL</span>
-                    <input type="text" id="tmp_kwd" name="tmp_kwd" value="" required="srch" label="키워드" class="textfield w6" autocomplete="off">
-                    <a href="#list" class="btnSrch"> <input type="button" class="btnSrchKwd" value="검색" autocomplete="off"></a>
-                </span>
-
-
-                <span class="item">
-                    <span class="title">로그인 필요 여부</span>
-                    로그인 필요 / 불필요
-                </span>
-                <span class="item">
-                    <span class="title">상품상세 삭제구문관리</span>
-                    0건
-                    <input type="button" class="btnOpenConDel" value="구문관리" autocomplete="off">
-                    <input type="button" class="btnOpenXtrPdList" value="등록상품목록(등록:2201)" autocomplete="off">
-                    <input type="button" class="btnOpenXtrPdallList" value="브랜드등록현황" autocomplete="off">
-                </span>
-            </div>
-
-            <div class="row">
-                <span class="item">
-                    <span class="title">URL</span>
-                    <input type="text" id="cllUrl" value="https://www.nike.com" class="textfield" size="130" readonly="" autocomplete="off">
-                    <input type="button" class="btnGoUrl" value="새창으로 바로가기" autocomplete="off">
-                </span>
-            </div>
-
-            <div class="row">
-                <textarea rows="10" cols="90" name="exinfo">상품 정보 조회시 유의 사항
-                </textarea>
-            </div>
-
-        </fieldset>
-    </div>
-    
-    <div id="listSearchConditionLayer">
-        <fieldset>
-            <legend>상품 정보 다운로드</legend>
-            <div class="row">
-                <span class="item">
-                    <span class="title">카테고리</span>
-                    <select name="shop_ctg1" id="shop_ctg1" required="reg" label="1차카테고리"><option value="">::1차카테고리 선택::</option><option value="0a">아웃도어</option><option value="10">스포츠</option><option value="20">캐주얼</option><option value="30">골프</option><option value="40">명품</option><option value="50">키즈</option><option value="80">완구</option><option value="90">기타 (속옷/잡화)</option><option value="a0">침구</option><option value="b0">반려동물용품</option></select>
-                    <select name="shop_ctg2" id="shop_ctg2" required="reg" label="2차카테고리"><option value="">::2차카테고리 선택::</option></select>
-                    <select name="shop_ctg3" id="shop_ctg3" required="reg" label="3차카테고리"><option value="">::3차카테고리 선택::</option></select>
-                </span>
-                <span class="item">
-                    <span class="title">품번병합여부</span>
-                    <select name="mrg_yn" id="mrg_yn">
-                        <option value="y">Y</option>
-                        <option value="n" selected="">N</option>
-                    </select>
-                </span>
-                <button !class="ui-button ui-widget ui-corner-all" id="btnReg">등록</button>
-                <button !class="ui-button ui-widget ui-corner-all" id="btnDel">삭제</button>
-                &nbsp;(<font style=" font-size:13px; color:#ff0000; font-weight:bold;">대기상품만 삭제 가능</font>) 
-            </div>
-        </fieldset>
-    </div>
-    
-    <div id="listLayer">
-        <table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tbody>
-                <tr>
-                    <th class="th_left center"><input type="checkbox" id="ck_all" autocomplete="off"></th>
-                    <th class="th_middle">이미지</th>
-                    <th class="th_middle">GOODS NO</th>
-                    <th class="th_middle">상품명</th>
-                    <th class="th_middle">권장판매가</th>
-                    <th class="th_middle">도매가</th>
-                    <th class="th_middle">옵션1</th>
-                    <th class="th_middle">옵션2</th>
-                    <th class="th_middle">상세이미지</th>
-                </tr>
-                <tr exrpdid="NT7UP44B">
-                    <td class="td_left center"><input type="checkbox" class="ck" name="ck[]" value="NT7UP44B" msg="항목을 선택하세요." autocomplete="off">
-                        <input type="hidden" name="url_NT7UP44B" value="https://www.thenorthfacekorea.co.kr/product/NT7UP44B" autocomplete="off"> 
-                    </td>
-                    <td class="td_middle center"><img src="/genie4you/upld/pd/110212/NT7UP44B.jpg" width="100" height="100"></td>
-                    <td class="td_middle center"><a href="https://www.thenorthfacekorea.co.kr/product/NT7UP44B" class="btnOpenLink">NT7UP44B</a></td>
-                    <td class="td_middle">CIRRUS S/S R/TEE</td>
-                    <td class="td_middle center"></td>
-                    <td class="td_middle center"></td>
-                    <td class="td_middle center"></td>
-                    <td class="td_middle center"></td>
-                    <td class="td_middle center"></td>
-                </tr>
-                <tr>
-                    <td colspan="20" class="no_data_row">조회된 자료가 없습니다.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-</form>
-
+	        <!--※ 등록일자 기준 내림차순 정렬됩니다.-->
+	    </div>
+	    
+	    <div id="listSearchConditionLayer">
+	        <fieldset>
+	            <legend>검색조건</legend>
+	            <div class="row">
+	                <span class="item">
+	                    <span class="title">쇼핑몰</span>
+	                    <select name="tmp_shop_id" id="tmp_shop_id" readonly="" class="select2 select2-hidden-accessible" width="200" data-select2-id="select2-data-tmp_shop_id" tabindex="-1" aria-hidden="true">
+	                        <option value="100101" selected="" data-select2-id="select2-data-2-81wg">프롬비아이</option>
+	                        <option value="100102">아떼스타</option>
+	                        <option value="100103">대상유통</option>
+	                    </select>
+	                    <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-1-b23x" style="width: 200px;">
+	                        <span class="selection">
+	                            <span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-tmp_shop_id-container" aria-controls="select2-tmp_shop_id-container">
+	                                <span class="select2-selection__rendered" id="select2-tmp_shop_id-container" role="textbox" aria-readonly="true" title="프롬비아이">프롬비아이</span>
+	                                <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
+	                            </span>
+	                        </span>
+	                        <span class="dropdown-wrapper" aria-hidden="true"></span>
+	                    </span>
+	                </span>
+	                <span class="item">
+	                    <span class="title">키워드 또는 URL</span>
+	                    <input type="text" id="tmp_kwd" name="tmp_kwd" value="" required="srch" label="키워드" class="textfield w6" autocomplete="off">
+	                    <a href="#list" class="btnSrch"> <input type="button" class="btnSrchKwd" value="검색" autocomplete="off" onClick="searchCrawling()"></a>
+	                </span>
+	
+	
+	                <span class="item">
+	                    <span class="title">로그인 필요 여부</span>
+	                    로그인 필요 / 불필요
+	                </span>
+	                <span class="item">
+	                    <span class="title">상품상세 삭제구문관리</span>
+	                    0건
+	                    <input type="button" class="btnOpenConDel" value="구문관리" autocomplete="off">
+	                    <input type="button" class="btnOpenXtrPdList" value="등록상품목록(등록:2201)" autocomplete="off">
+	                    <input type="button" class="btnOpenXtrPdallList" value="브랜드등록현황" autocomplete="off">
+	                </span>
+	            </div>
+	
+	            <div class="row">
+	                <span class="item">
+	                    <span class="title">URL</span>
+	                    <input type="text" id="cllUrl" value="https://www.nike.com" class="textfield" size="130" readonly="" autocomplete="off">
+	                    <input type="button" class="btnGoUrl" value="새창으로 바로가기" autocomplete="off">
+	                </span>
+	            </div>
+	
+	            <div class="row">
+	                <textarea rows="10" cols="90" name="exinfo">상품 정보 조회시 유의 사항
+	                </textarea>
+	            </div>
+	
+	        </fieldset>
+	    </div>
+	    
+	    <div id="listSearchConditionLayer">
+	        <fieldset>
+	            <legend>상품 정보 다운로드</legend>
+	            <div class="row">
+	                <span class="item">
+	                    <span class="title">카테고리</span>
+	                    <select name="shop_ctg1" id="shop_ctg1" required="reg" label="1차카테고리"><option value="">::1차카테고리 선택::</option><option value="0a">아웃도어</option><option value="10">스포츠</option><option value="20">캐주얼</option><option value="30">골프</option><option value="40">명품</option><option value="50">키즈</option><option value="80">완구</option><option value="90">기타 (속옷/잡화)</option><option value="a0">침구</option><option value="b0">반려동물용품</option></select>
+	                    <select name="shop_ctg2" id="shop_ctg2" required="reg" label="2차카테고리"><option value="">::2차카테고리 선택::</option></select>
+	                    <select name="shop_ctg3" id="shop_ctg3" required="reg" label="3차카테고리"><option value="">::3차카테고리 선택::</option></select>
+	                </span>
+	                <span class="item">
+	                    <span class="title">품번병합여부</span>
+	                    <select name="mrg_yn" id="mrg_yn">
+	                        <option value="y">Y</option>
+	                        <option value="n" selected="">N</option>
+	                    </select>
+	                </span>
+	                <button !class="ui-button ui-widget ui-corner-all" id="btnReg">등록</button>
+	                <button !class="ui-button ui-widget ui-corner-all" id="btnDel">삭제</button>
+	                &nbsp;(<font style=" font-size:13px; color:#ff0000; font-weight:bold;">대기상품만 삭제 가능</font>) 
+	            </div>
+	        </fieldset>
+	    </div>
+	    
+	    <div id="listLayer">
+	        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+	            <tbody>
+	                <tr>
+	                    <th class="th_left center"><input type="checkbox" id="ck_all" autocomplete="off"></th>
+	                    <th class="th_middle">이미지</th>
+	                    <th class="th_middle">상품명</th>
+	                    <th class="th_middle">권장판매가</th>
+	                    <th class="th_middle">도매가</th>
+	                    <th class="th_middle">옵션1</th>
+	                    <th class="th_middle">옵션2</th>
+	                    <!-- <th class="th_middle">상세이미지</th>  -->
+	                </tr>
+	                <!--
+	                <tr>
+	                 
+	                    <td class="td_left center"><input type="checkbox" class="ck" name="ck[]" value="NT7UP44B" msg="항목을 선택하세요." autocomplete="off">
+	                        <input type="hidden" name="url_NT7UP44B" value="https://www.thenorthfacekorea.co.kr/product/NT7UP44B" autocomplete="off"> 
+	                    </td>
+	                    <td class="td_middle center"><img src="/genie4you/upld/pd/110212/NT7UP44B.jpg" width="100" height="100"></td>
+	                    <td class="td_middle">CIRRUS S/S R/TEE</td>
+	                    <td class="td_middle center"></td>
+	                    <td class="td_middle center"></td>
+	                    <td class="td_middle center"></td>
+	                    <td class="td_middle center"></td>
+	                    <td class="td_middle center"></td>
+	                </tr>
+	                -->
+	                <tr>
+	                    <td colspan="20" class="no_data_row">조회된 자료가 없습니다.</td>
+	                </tr>
+	            </tbody>
+	        </table>
+	    </div>
+	</form>
 </body>
+<script type="text/javascript">
+	$(document).ready({
+		
+	});
+	
+	/*
+		URL기준 크롤링 버튼
+	*/
+	function searchCrawling(){
+		var url = $("#tmp_kwd").val();
+		$.ajax({
+			url:"/crawling",
+			type:"POST",
+			data:url,
+			success: function onData(data){
+				drawingTable(data);
+			},
+			error: function onError(error){
+				
+			}
+		})
+	}
+	
+	function drawingTable(data){
+		var innerHtml = "";
+		innerHtml += '<tr>';
+		innerHtml += '	<td class="td_left center"><input type="checkbox" class="ck" name="ck[]" value="" msg="항목을 선택하세요." autocomplete="off">';
+		innerHtml += '		<input type="hidden" name="" value="" autocomplete="off">';
+		innerHtml += '	</td>';
+		innerHtml += '	<td  class="td_middle center"><img src="/"></td>';
+		innerHtml += '	<td  class="td_middle center">'+data.title+'</td>';
+		innerHtml += '	<td  class="td_middle center">'+data.price1+'</td>';
+		innerHtml += '	<td  class="td_middle center">'+data.price2+'</td>';
+		innerHtml += '	<td  class="td_middle center">'+data.sel1+'</td>';
+		innerHtml += '	<td  class="td_middle center">'+data.sel2+'</td>';
+		innerHtml += '</tr>';
+		
+		
+		$("#listLayer tbody").append(innerHtml);
+	}
+</script>
 </html>
