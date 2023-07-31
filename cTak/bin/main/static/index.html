@@ -110,7 +110,13 @@
 	                <button !class="ui-button ui-widget ui-corner-all" id="btnReg">등록</button>
 	                <button !class="ui-button ui-widget ui-corner-all" id="btnDel">삭제</button>
 	                &nbsp;(<font style=" font-size:13px; color:#ff0000; font-weight:bold;">대기상품만 삭제 가능</font>) 
+	                
 	            </div>
+	            <div>
+					<span>
+						<input type="checkbox" id="chk_img_hidden" onClick="hideImage();">이미지 비노출
+					</span>
+				</div>
 	        </fieldset>
 	    </div>
 	    
@@ -118,12 +124,12 @@
 	        <table border="0" width="100%" cellspacing="0" cellpadding="0">
 	            <tbody>
 	                <tr>
-	                    <th class="th_left center"><input type="checkbox" id="ck_all" autocomplete="off"></th>
-	                    <th class="th_middle">이미지</th>
-	                    <th class="th_middle">상품명</th>
-	                    <th class="th_middle">권장판매가</th>
-	                    <th class="th_middle">도매가</th>
-	                    <th class="th_middle">옵션</th>
+	                    <th class="th_checkBox th_left center"><input type="checkbox" id="ck_all" autocomplete="off"></th>
+	                    <th class="th_image th_middle">이미지</th>
+	                    <th class="th_gname th_middle">상품명</th>
+	                    <th class="th_priceRec th_middle">권장판매가</th>
+	                    <th class="th_priceOri th_middle">도매가</th>
+	                    <th class="th_option th_middle">옵션</th>
 	                    <!-- <th class="th_middle">상세이미지</th>  -->
 	                </tr>
 	                <!--
@@ -141,16 +147,16 @@
 	                    <td class="td_middle center"></td>
 	                </tr>
 	                -->
-	                <tr>
-	                    <td colspan="20" class="no_data_row">조회된 자료가 없습니다.</td>
-	                </tr>
+	               
 	            </tbody>
 	        </table>
 	    </div>
 	</form>
 </body>
+
 <script type="text/javascript">
 	$(document).ready(function(){
+		searchCrawling();
 	});
 	
 	/*
@@ -159,7 +165,7 @@
 	function searchCrawling(){
 		var url = "https://fromvi.com/product/detail.html?product_no=1221";
 		$.ajax({
-			url:"/crawling",
+			url:"/alpero",
 			type:"POST",
 			data:url,
 			contentType: "application/json; charset=utf-8",
@@ -174,8 +180,8 @@
 	}
 	
 	function drawingTable(data){
-		$("#listLayer tbody").empty();
-		
+		//$("#listLayer tbody").empty();
+		/*
 		if(data == null){
 			var innerHtml = "";
 			innerHtml += '<tr>';
@@ -185,21 +191,55 @@
         	return;
         	$("#listLayer tbody").append(innerHtml);
 		}
+		*/
 		for(var i = 0; i<data.length; i++){
 			var innerHtml = "";
 			innerHtml += '<tr>';
 			innerHtml += '	<td class="td_left center"><input type="checkbox" class="ck" name="ck[]" value="" msg="항목을 선택하세요." autocomplete="off">';
 			innerHtml += '		<input type="hidden" name="" value="" autocomplete="off">';
 			innerHtml += '	</td>';
-			innerHtml += '	<td  class="td_middle center"><img src="'+data[i].imgThumbLink+'"></td>';
-			innerHtml += '	<td  class="td_middle center">'+data[i].title+'</td>';
-			innerHtml += '	<td  class="td_middle center">'+data[i].price1+'</td>';
-			innerHtml += '	<td  class="td_middle center">'+data[i].price2+'</td>';
-			innerHtml += '	<td  class="td_middle center">'+data[i].sele+'</td>';
+			innerHtml += '	<td  class="td_image td_middle center"><img src="'+data[i].imgThumbLink+'"></td>';
+			innerHtml += '	<td  class="td_gname td_middle center">'+data[i].title+'</td>';
+			innerHtml += '	<td  class="td_priceRec td_middle center">'+data[i].price1+'</td>';
+			innerHtml += '	<td  class="td_priceOri td_middle center">'+data[i].price2+'</td>';
+			innerHtml += '	<td  class="td_option td_middle ">'+data[i].sele+'</td>';
 			innerHtml += '</tr>';
 			
-			
 			$("#listLayer tbody").append(innerHtml);
+		}
+		
+		$(".td_image").css({
+			"padding":"0"
+		});
+		$(".td_image img").css({
+			"max-width":"80px",
+			"margin":"3px 0 3px 0"
+		});
+		$(".td_gname").css({
+			"width":"180px",
+			"min-width" : "180px",
+			"max-width" : "180px",
+			"line-height" : "18px",
+			"overflow" : "visible",
+			"text-overflow" : "ellipsis",
+			"white-space" : "normal"
+		});
+		$(".td_option").css({
+			"padding":"10px 0"
+		});
+		
+		hideImage();
+	}
+	
+	function hideImage(){
+		var chk = $("#chk_img_hidden").is(":checked");
+		
+		if(chk){
+			$("#listLayer .th_image").css("display","none");
+			$("#listLayer .td_image").css("display","none");
+		}else{
+			$("#listLayer .th_image").css("display","");
+			$("#listLayer .td_image").css("display","");
 		}
 	}
 </script>

@@ -4,52 +4,52 @@ BODY {
 	WIDTH: 100%; HEIGHT: 100%; color:#666; 
 }
 BODY {
-	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px;
 }
 FORM {
-	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px;
 }
 IMG {
 	BORDER:0;
 }
 A IMG {
-	VERTICAL-ALIGN: middle
+	VERTICAL-ALIGN: middle;
 }
 BODY {
-	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px
+	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px;
 }
 SPAN {
 	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px;
 }
 TD {
-	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px
+	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px;
 }
 DIV {
-	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px
+	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px;
 }
 LABEL {
 	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px; vertical-align:middle;
 }
 TH {
-	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px
+	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px;
 }
 BR {
-	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px
+	LINE-HEIGHT: 130%; FONT-FAMILY: "돋움", "굴림"; FONT-SIZE: 12px;
 }
 UL {
-	LIST-STYLE-POSITION: outside; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+	LIST-STYLE-POSITION: outside; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px;
 }
 OL {
-	LIST-STYLE-POSITION: outside; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+	LIST-STYLE-POSITION: outside; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px;
 }
 LI {
-	LIST-STYLE-POSITION: outside; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+	LIST-STYLE-POSITION: outside; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px;
 }
 INPUT {
 	FONT-FAMILY: "돋움", "굴림"; font-size:12px; vertical-align:middle;
 }
 TEXTAREA {
-	FONT-FAMILY: "돋움", "굴림"
+	FONT-FAMILY: "돋움", "굴림";
 }
 
 .textfield {
@@ -68,58 +68,58 @@ input[type='file']{
 }
 
 TEXTAREA {
-	BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; BORDER-TOP: #aaaaaa 1px solid; BORDER-RIGHT: #aaaaaa 1px solid
+	BORDER-BOTTOM: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; BORDER-TOP: #aaaaaa 1px solid; BORDER-RIGHT: #aaaaaa 1px solid;
 }
 A:link {
-	FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none
+	FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none;
 }
 A:visited {
-	FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none
+	FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none;
 }
 A:hover {
-	FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none
+	FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none;
 }
 A:active {
-	FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none
+	FONT-FAMILY: "돋움", "돋움체"; COLOR: #0077a1; FONT-SIZE: 12px; TEXT-DECORATION: none;
 }
 .w1 {
-	WIDTH: 10px
+	WIDTH: 10px;
 }
 .w2 {
-	WIDTH: 25px
+	WIDTH: 25px;
 }
 .w3 {
-	WIDTH: 50px
+	WIDTH: 50px;
 }
 .w4 {
-	WIDTH: 100px
+	WIDTH: 100px;
 }
 .w5 {
-	WIDTH: 150px
+	WIDTH: 150px;
 }
 .w6 {
-	WIDTH: 200px
+	WIDTH: 200px;
 }
 .w7 {
-	WIDTH: 300px
+	WIDTH: 300px;
 }
 .w8 {
-	WIDTH: 300px
+	WIDTH: 300px;
 }
 .w9 {
-	WIDTH: 400px
+	WIDTH: 400px;
 }
 .w10 {
-	WIDTH: 500px
+	WIDTH: 500px;
 }
 .w100 {
-	WIDTH: 100%
+	WIDTH: 100%;
 }
 .w90 {
-	WIDTH: 90%
+	WIDTH: 90%;
 }
 LEGEND {
-	COLOR: #a26725; FONT-SIZE: 12px; FONT-WEIGHT: bold
+	COLOR: #a26725; FONT-SIZE: 12px; FONT-WEIGHT: bold;
 }
 
 INPUT.required {
@@ -127,87 +127,105 @@ INPUT.required {
     BORDER-LEFT: #77acc0 1px solid; 
     BACKGROUND-COLOR: #eff6fa; 
     BORDER-TOP: #77acc0 1px solid; 
-    BORDER-RIGHT: #77acc0 1px solid
+    BORDER-RIGHT: #77acc0 1px solid;
 }
 
 TEXTAREA.required {
-	BORDER-BOTTOM: #77acc0 1px solid; BORDER-LEFT: #77acc0 1px solid; BACKGROUND-COLOR: #eff6fa; BORDER-TOP: #77acc0 1px solid; BORDER-RIGHT: #77acc0 1px solid
+	BORDER-BOTTOM: #77acc0 1px solid; BORDER-LEFT: #77acc0 1px solid; BACKGROUND-COLOR: #eff6fa; BORDER-TOP: #77acc0 1px solid; BORDER-RIGHT: #77acc0 1px solid;
 }
 SELECT.required {
-	BACKGROUND-COLOR: #d9ffd9
+	BACKGROUND-COLOR: #d9ffd9;
 }
 .requied_comment {
-	MARGIN: 5px 2px
+	MARGIN: 5px 2px;
 }
 FIELDSET {
-	PADDING-LEFT: 8px
+	PADDING-LEFT: 8px;
 }
 #popupLayer {
-	PADDING-BOTTOM: 10px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; PADDING-TOP: 10px
+	PADDING-BOTTOM: 10px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; PADDING-TOP: 10px;
 }
 
 #title2Layer {
-	BACKGROUND-IMAGE: url(../images/admin/icon_dot.gif); MARGIN-TOP: 10px; PADDING-LEFT: 20px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left center; MARGIN-BOTTOM: 13px; HEIGHT: 16px; FONT-SIZE: 14px; FONT-WEIGHT: bold
+	BACKGROUND-IMAGE: url(../images/admin/icon_dot.gif); MARGIN-TOP: 10px; PADDING-LEFT: 20px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: left center; MARGIN-BOTTOM: 13px; HEIGHT: 16px; FONT-SIZE: 14px; FONT-WEIGHT: bold;
 }
 .title3Layer {
-	MARGIN-TOP: 10px; PADDING-LEFT: 20px; MARGIN-BOTTOM: 5px; FONT-SIZE: 12px; FONT-WEIGHT: bold
+	MARGIN-TOP: 10px; PADDING-LEFT: 20px; MARGIN-BOTTOM: 5px; FONT-SIZE: 12px; FONT-WEIGHT: bold;
 }
 #userHeaderTopMargin {
-	MARGIN-TOP: 10px
+	MARGIN-TOP: 10px;
 }
 #userHeaderBottomMargin {
-	MARGIN-TOP: 10px
+	MARGIN-TOP: 10px;
 }
 #listButtonLayer {
-	TEXT-ALIGN: left; MARGIN-BOTTOM: 15px
+	TEXT-ALIGN: left; MARGIN-BOTTOM: 15px;
 }
 #listSearchConditionLayer {
-	MARGIN-TOP: 10px
+	MARGIN-TOP: 10px;
 }
 #listSearchConditionLayer .title {
-	FONT-WEIGHT: bold
+	FONT-WEIGHT: bold;
 }
 #listSearchConditionLayer .row {
-	MARGIN: 3px 0px 5px 5px
+	MARGIN: 3px 0px 5px 5px;
 }
 #listSearchConditionLayer .row_empty {
-	TEXT-ALIGN: center; MARGIN: 3px 0px 5px 5px
+	TEXT-ALIGN: center; MARGIN: 3px 0px 5px 5px;
 }
 #listSearchConditionLayer .item {
-	MARGIN-RIGHT: 20px
+	MARGIN-RIGHT: 20px;
 }
 #listLayer {
-	MARGIN-TOP: 20px
+	MARGIN-TOP: 20px;
 }
 #listLayer .th_left {
-	BACKGROUND-IMAGE: url(../images/admin/bg_list_th.gif); BORDER-BOTTOM: #e5e5e5 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BACKGROUND-REPEAT: repeat-x; WHITE-SPACE: nowrap; HEIGHT: 28px; COLOR: #222; FONT-SIZE: 11px; BORDER-TOP: #e5e5e5 1px solid; BORDER-RIGHT: #ede 1px solid; BORDER-LEFT: #ede 1px solid; PADDING-TOP: 2px
+	BACKGROUND-IMAGE: url(../images/admin/bg_list_th.gif); BORDER-BOTTOM: #e5e5e5 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BACKGROUND-REPEAT: repeat-x; WHITE-SPACE: nowrap; HEIGHT: 28px; COLOR: #222; FONT-SIZE: 11px; BORDER-TOP: #e5e5e5 1px solid; BORDER-RIGHT: #ede 1px solid; BORDER-LEFT: #ede 1px solid; PADDING-TOP: 2px;
 }
 #listLayer .th_middle {
 	BACKGROUND-IMAGE: url(../images/admin/bg_list_th.gif); BORDER-BOTTOM: #e5e5e5 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BACKGROUND-REPEAT: repeat-x; WHITE-SPACE: nowrap; HEIGHT: 28px; COLOR: #222; FONT-SIZE: 11px; BORDER-TOP: #e5e5e5 1px solid; BORDER-RIGHT: #ede 1px solid; PADDING-TOP: 2px;
 }
 #listLayer .th_right {
-	BACKGROUND-IMAGE: url(../images/admin/bg_list_th.gif); BORDER-BOTTOM: #e5e5e5 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BACKGROUND-REPEAT: repeat-x; WHITE-SPACE: nowrap; HEIGHT: 28px; COLOR: #222; FONT-SIZE: 11px; BORDER-TOP: #e5e5e5 1px solid; BORDER-RIGHT: #ede 1px solid; PADDING-TOP: 2px
+	BACKGROUND-IMAGE: url(../images/admin/bg_list_th.gif); BORDER-BOTTOM: #e5e5e5 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BACKGROUND-REPEAT: repeat-x; WHITE-SPACE: nowrap; HEIGHT: 28px; COLOR: #222; FONT-SIZE: 11px; BORDER-TOP: #e5e5e5 1px solid; BORDER-RIGHT: #ede 1px solid; PADDING-TOP: 2px;
 }
 #listLayer .th {
-	BORDER-BOTTOM: #ede 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; BACKGROUND-COLOR: #b2dbea; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; HEIGHT: 28px; COLOR: #222222; BORDER-RIGHT: #ede 1px solid; PADDING-TOP: 2px
+	BORDER-BOTTOM: #ede 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; BACKGROUND-COLOR: #b2dbea; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; HEIGHT: 28px; COLOR: #222222; BORDER-RIGHT: #ede 1px solid; PADDING-TOP: 2px;
 }
 #listLayer .td_left {
-	BORDER-BOTTOM: #ededed 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; WHITE-SPACE: nowrap; HEIGHT: 25px; PADDING-TOP: 2px
+	BORDER-BOTTOM: #ededed 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; WHITE-SPACE: nowrap; HEIGHT: 25px; PADDING-TOP: 2px;
 }
 #listLayer .td_middle {
-	BORDER-BOTTOM: #ededed 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; WHITE-SPACE: nowrap; HEIGHT: 25px; PADDING-TOP: 2px
+	BORDER-BOTTOM: #ededed 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; WHITE-SPACE: normal; HEIGHT: 25px; PADDING-TOP: 2px;
 }
 #listLayer .td_right {
-	BORDER-BOTTOM: #ededed 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; WHITE-SPACE: nowrap; HEIGHT: 25px; PADDING-TOP: 2px
+	BORDER-BOTTOM: #ededed 1px solid; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; WHITE-SPACE: nowrap; HEIGHT: 25px; PADDING-TOP: 2px;
 }
+
+#listLayer .th_checkBox{
+	width: 30px; min-width: 30px; max-width: 30px;
+}
+#listLayer .th_image{
+	width: 80px; min-width: 80px; max-width: 80px;
+}
+#listLayer .th_gname{
+	width: 180px; min-width: 180px; max-width: 180px;
+}
+#listLayer .th_priceRec{
+	width: 85px; min-width: 85px; max-width: 85px;
+}
+#listLayer .th_priceOri{
+	width: 75px; min-width: 75px; max-width: 75px;
+}
+
+
 .no_data_row {
-	BORDER-BOTTOM: #ededed 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; HEIGHT: 25px; PADDING-TOP: 5px
+	BORDER-BOTTOM: #ededed 1px solid; TEXT-ALIGN: center; PADDING-BOTTOM: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; HEIGHT: 25px; PADDING-TOP: 5px;
 }
 .center {
-	TEXT-ALIGN: center
+	TEXT-ALIGN: center;
 }
 #total_cnt {
-	COLOR: #ff5400
+	COLOR: #ff5400;
 }
 
 select{vertical-align:middle; height:22px;}

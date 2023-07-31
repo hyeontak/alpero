@@ -1,172 +1,66 @@
 package com.dev.cTak.controller;
 
-import com.dev.cTak.vo.ItemVo;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.dev.cTak.service.ItemCrawlingService;
+import com.dev.cTak.vo.ItemVo;
 
 @Controller
 public class ItemCrawlingController {
 
-    private String WEB_STR = "D:\\work\\chromedriver_win32\\chromedriver.exe";
-
-    @PostMapping("/crawling")
-    @ResponseBody
-    public List<ItemVo> crawling(@RequestBody String url) {
-        HashMap map = new HashMap();
-        System.setProperty("webdriver.chrome.driver", "D:\\work\\chromedriver-win32\\chromedriver.exe");
-
-        WebDriver driver = new ChromeDriver();
-        List<ItemVo> list = new ArrayList<>();
-
-        list = web_fromvi(driver);
-
-        //map.put("items",web_fromvi(driver));
-
-
-        return list;
-    }
-
-    private static List<ItemVo> web_fromvi(WebDriver driver){
-        List<ItemVo> items = new ArrayList<ItemVo>();
-
-        try{
-            driver.get("https://fromvi.com/member/login.html");
-
-            driver.findElement(By.cssSelector("#member_id")).click();
-            driver.findElement(By.cssSelector("#member_id")).sendKeys("alpero1122");
-
-            driver.findElement(By.cssSelector("#member_passwd")).click();
-            driver.findElement(By.cssSelector("#member_passwd")).sendKeys("pepperlavu0315");
-
-
-            driver.findElement(By.cssSelector(".login fieldset a")).click();
-
-            Thread.sleep(1000);
-
-            WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofMinutes(3));
-            String[] list = {
-                    "https://fromvi.com/product/detail.html?product_no=1221",
-                    "https://fromvi.com/product/detail.html?product_no=649"
-            };
-            int cnt = 0;
-
-            for(String url: list){
-                ItemVo item = new ItemVo();
-                driver.get(url);
-                Thread.sleep(1000);
-                WebElement ele = driver.findElement((By.cssSelector(".imgArea")));
-                String imgThumbLink = ele.findElement(By.cssSelector(".keyImg > a > img")).getAttribute("src");
-                
-                item.setImgThumbLink(imgThumbLink);
-                
-                ele = driver.findElement((By.cssSelector(".infoArea")));
-                String title = ele.findElement(By.cssSelector("h3")).getText();
-                String price1 = ele.findElement(By.cssSelector("#span_product_price_custom")).getText();
-                String price2 = ele.findElement(By.cssSelector("#span_product_price_text")).getText();
-
-                item.setTitle(title);
-                item.setPrice1(price1);
-                item.setPrice2(price2);
-
-                int optionCnt = ele.findElements(By.cssSelector(".xans-product-option tr")).size();
-
-                if(optionCnt > 1){
-                    List<WebElement> seleEle = ele.findElements(By.cssSelector("table > tbody > tr:nth-of-type(1) > td > select > option"));
-                    String optionList = "";
-                    int idx = 1;
-                    
-                    for(WebElement value : seleEle){
-                        if(!value.getAttribute("value").contains("*")){
-                            value.click();
-                            List<WebElement> optionEle = ele.findElements(By.cssSelector("table > tbody > tr:nth-of-type(2) > td > select > option"));
-
-                            for(WebElement optionValue : optionEle){
-                                if(!optionValue.getAttribute("value").contains("*")){
-                                	optionList += value.getText() + ": " + optionValue.getText();
-                                	if(idx < optionEle.size()) {
-                                		 optionList += ", "; 
-                                	}
-                                }
-                            }
-                        }
-                    }
-                    item.setSele(optionList);
-                }else{
-                    List<WebElement> optionEle = ele.findElements(By.cssSelector("table > tbody > tr > td > select > optgroup > option"));
-                    
-                    String optionList = "";
-                    
-                    int idx = 1;
-                    
-                    for(WebElement value : optionEle){
-                    	optionList += value.getText();
-                    	if(idx < optionEle.size()) {
-                    		optionList += ", ";
-                    	}
-                    	
-                    	idx++;
-                    }
-                    item.setSele(optionList);
-                }
-                System.out.println("======================================");
-
-                items.add(cnt, item);
-
-                cnt++;
-            }
-
-
-        }catch(TimeoutException e){
-            e.printStackTrace();
-            System.out.println(e.toString());
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println(e.toString());
-        }
-
-        driver.close();
-        driver.quit();
-
-        return items;
-    }
-
-    private static ItemVo web_burberry(WebDriver driver){
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofMinutes(3));
-
+	private final ItemCrawlingService itemCrawlingService;
+	
+	public ItemCrawlingController(ItemCrawlingService itemCrawlingService) {
+		this.itemCrawlingService = itemCrawlingService;
+	}
+	
+	@GetMapping("/crawling")
+	public String crawling(Model model, String url) throws Exception{
+		
+		//url = "https://fromvi.com/product/detail.html?product_no=1194&cate_no=1&display_group=";
+		
+		/**************************************************************************/
+		/**************					START						 **************/
+		
+		Jsoup.connect("https://fromvi.com").get();
+		
+		Connection.Response loginPageResponse = Jsoup.connect("https://fromvi.com/exec/front/Member/login/")
+				.timeout(3000)
+				.data("member_id","alpero1122","member_passwd","pepperlavu0315")
+				.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
+				.method(Connection.Method.POST)
+				.execute();
+		
+		Map<String, String> cookies = loginPageResponse.cookies();
+		Document document = Jsoup.connect(url).cookies(loginPageResponse.cookies()).get();
+		
+        Elements contents = document.select(".infoArea");
         ItemVo items = new ItemVo();
-
-        try{
-            List<String> list = new ArrayList<>();
-
-            driver.get("https://kr.burberry.com/");
-
-
-
-
-
-
-
-        }catch(TimeoutException e){
-            e.printStackTrace();
-            System.out.println(e.toString());
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println(e.toString());
-        }
-        return items;
-    }
+		
+        items.setTitle(contents.select("h3").text());
+		items.setPrice1(contents.select("#span_product_price_custom").text());
+		items.setPrice2(contents.select("#span_product_price_text").text());
+		
+		
+		/**************************************************************************/
+		/**************************************************************************/
+		System.out.println(url);
+		System.out.println(items.getTitle());
+		System.out.println(items.getPrice1());
+		//ItemVo itemList = itemCrawlingService.getItemsData();
+		
+		//model.addAttribute("items", itemList);
+		
+		return "items";
+	}
 }
-
+ 
