@@ -1,6 +1,7 @@
 package com.dev.cTak.vo;
 
-import lombok.Builder;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.ToString;
 
@@ -11,8 +12,7 @@ public class ItemVo {
 	private String price1 = "";			//권장판매가 
 	private String price2 = "";			//도매가 
 	
-	private String sel1 = "";			//옵션1
-	private String sel2 = "";			//옵션2
+	private String sele = "";
 	
 	private String imgThumbLink = ""; 	//썸네일 이미지 경로
 	private String imgDetailLink = ""; 	//상세이미지 경로
@@ -35,17 +35,11 @@ public class ItemVo {
 	public void setPrice2(String price2) {
 		this.price2 = price2;
 	}
-	public String getSel1() {
-		return sel1;
+	public String getSele() {
+		return sele;
 	}
-	public void setSel1(String sel1) {
-		this.sel1 = sel1;
-	}
-	public String getSel2() {
-		return sel2;
-	}
-	public void setSel2(String sel2) {
-		this.sel2 = sel2;
+	public void setSele(String sele) {
+		this.sele = sele;
 	}
 	public String getImgThumbLink() {
 		return imgThumbLink;
@@ -59,6 +53,4 @@ public class ItemVo {
 	public void setImgDetailLink(String imgDetailLink) {
 		this.imgDetailLink = imgDetailLink;
 	}
-	
-	
 }

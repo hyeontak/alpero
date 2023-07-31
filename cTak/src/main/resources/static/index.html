@@ -123,8 +123,7 @@
 	                    <th class="th_middle">상품명</th>
 	                    <th class="th_middle">권장판매가</th>
 	                    <th class="th_middle">도매가</th>
-	                    <th class="th_middle">옵션1</th>
-	                    <th class="th_middle">옵션2</th>
+	                    <th class="th_middle">옵션</th>
 	                    <!-- <th class="th_middle">상세이미지</th>  -->
 	                </tr>
 	                <!--
@@ -151,44 +150,47 @@
 	</form>
 </body>
 <script type="text/javascript">
-	$(document).ready({
-		
+	$(document).ready(function(){
 	});
 	
 	/*
 		URL기준 크롤링 버튼
 	*/
 	function searchCrawling(){
-		var url = $("#tmp_kwd").val();
+		var url = "https://fromvi.com/product/detail.html?product_no=1221";
 		$.ajax({
 			url:"/crawling",
 			type:"POST",
 			data:url,
+			contentType: "application/json; charset=utf-8",
 			success: function onData(data){
+				console.log(data);
 				drawingTable(data);
 			},
 			error: function onError(error){
 				
 			}
-		})
+		}) 
 	}
 	
 	function drawingTable(data){
-		var innerHtml = "";
-		innerHtml += '<tr>';
-		innerHtml += '	<td class="td_left center"><input type="checkbox" class="ck" name="ck[]" value="" msg="항목을 선택하세요." autocomplete="off">';
-		innerHtml += '		<input type="hidden" name="" value="" autocomplete="off">';
-		innerHtml += '	</td>';
-		innerHtml += '	<td  class="td_middle center"><img src="/"></td>';
-		innerHtml += '	<td  class="td_middle center">'+data.title+'</td>';
-		innerHtml += '	<td  class="td_middle center">'+data.price1+'</td>';
-		innerHtml += '	<td  class="td_middle center">'+data.price2+'</td>';
-		innerHtml += '	<td  class="td_middle center">'+data.sel1+'</td>';
-		innerHtml += '	<td  class="td_middle center">'+data.sel2+'</td>';
-		innerHtml += '</tr>';
 		
-		
-		$("#listLayer tbody").append(innerHtml);
+		for(var i = 0; i<data.length; i++){
+			var innerHtml = "";
+			innerHtml += '<tr>';
+			innerHtml += '	<td class="td_left center"><input type="checkbox" class="ck" name="ck[]" value="" msg="항목을 선택하세요." autocomplete="off">';
+			innerHtml += '		<input type="hidden" name="" value="" autocomplete="off">';
+			innerHtml += '	</td>';
+			innerHtml += '	<td  class="td_middle center"><img src="'+data[i].imgThumbLink+'"></td>';
+			innerHtml += '	<td  class="td_middle center">'+data[i].title+'</td>';
+			innerHtml += '	<td  class="td_middle center">'+data[i].price1+'</td>';
+			innerHtml += '	<td  class="td_middle center">'+data[i].price2+'</td>';
+			innerHtml += '	<td  class="td_middle center">'+data[i].sele+'</td>';
+			innerHtml += '</tr>';
+			
+			
+			$("#listLayer tbody").append(innerHtml);
+		}
 	}
 </script>
 </html>
