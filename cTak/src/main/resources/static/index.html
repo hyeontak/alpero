@@ -174,7 +174,17 @@
 	}
 	
 	function drawingTable(data){
+		$("#listLayer tbody").empty();
 		
+		if(data == null){
+			var innerHtml = "";
+			innerHtml += '<tr>';
+            innerHtml += '<td colspan="20" class="no_data_row">조회된 자료가 없습니다.</td>';
+        	innerHtml += '</tr>';
+        	
+        	return;
+        	$("#listLayer tbody").append(innerHtml);
+		}
 		for(var i = 0; i<data.length; i++){
 			var innerHtml = "";
 			innerHtml += '<tr>';
