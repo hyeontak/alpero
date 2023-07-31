@@ -157,7 +157,55 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		searchCrawling();
+	})
+	.ajaxStart(function(){
+		LoadingWithMask();
+	})
+	.ajaxStop(function(){
+		closeLoadingWithMask();
 	});
+	
+	function LoadingWithMask() {
+	    var maskHeight = $(document).height();
+	    var maskWidth  = window.document.body.clientWidth;
+	     
+	    var loadingArea = "<div id='loadingArea' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+	    var loadingImg = '';
+	 
+	    loadingImg += "<div id='loadingImg'>";
+	    loadingImg += " <img src='img/loadingBar.gif' style='position: absolute; display: block; margin: 0px auto;'/>";
+	    loadingImg += "</div>"; 
+	 
+	    $('body')
+	        .append(loadingArea)
+	        .append(loadingImg);
+	 
+	    $('#loadingArea').css({
+	            'width' : maskWidth,
+	            'height': maskHeight,
+	            'opacity' : '0.3'
+	    }); 
+	  
+	    //마스크 표시
+	    $('#loadingArea').show();
+	  
+	    //로딩중 이미지 표시
+	    $('#loadingImg').show();
+	}
+	 
+	function closeLoadingWithMask() {
+	    $('#loadingArea, #loadingImg').hide();
+	    $('#loadingArea, #loadingImg').empty();  
+	}
+	
+	function wrapWindowByMask(){
+		var maskHeight = $(document).height();  
+		var maskWidth = $(window).width();  
+		
+		$('#loadingArea').css({'width':maskWidth,'height':maskHeight});  
+		
+		$('#loadingArea').fadeTo("slow",0.6);    
+	}
 	
 	/*
 		URL기준 크롤링 버튼
@@ -208,6 +256,13 @@
 			$("#listLayer tbody").append(innerHtml);
 		}
 		
+		innerHtmlCss();
+		
+		hideImage();
+	}
+	
+	/*innerHtml css 적용*/
+	function innerHtmlCss(){
 		$(".td_image").css({
 			"padding":"0"
 		});
@@ -227,10 +282,9 @@
 		$(".td_option").css({
 			"padding":"10px 0"
 		});
-		
-		hideImage();
-	}
+	}	
 	
+	/*이미지 노출 여부 버튼 이벤트*/
 	function hideImage(){
 		var chk = $("#chk_img_hidden").is(":checked");
 		

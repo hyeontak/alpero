@@ -229,3 +229,18 @@ FIELDSET {
 }
 
 select{vertical-align:middle; height:22px;}
+
+#loadingArea {  
+	position:absolute;  
+	left:0;
+	top:0;
+	z-index:100;  
+	background-color:#000;  
+	display:none;  
+}
+#loadingImg {
+	position:absolute;
+	left:45%;
+	top:40%;
+	z-index:120;
+}

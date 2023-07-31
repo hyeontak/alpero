@@ -104,6 +104,7 @@ public class AlperoController {
                                 	if(idx < optionEle.size()) {
                                 		 optionList += ", "; 
                                 	}
+                                	idx++;
                                 }
                             }
                         }
@@ -126,7 +127,6 @@ public class AlperoController {
                     }
                     item.setSele(optionList);
                 }
-                System.out.println("======================================");
 
                 items.add(cnt, item);
 
