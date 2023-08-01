@@ -91,7 +91,6 @@ public class AlperoController {
                 if(optionCnt > 1){
                     List<WebElement> seleEle = ele.findElements(By.cssSelector("table > tbody > tr:nth-of-type(1) > td > select > option"));
                     String optionList = "";
-                    int idx = 1;
                     
                     for(WebElement value : seleEle){
                         if(!value.getAttribute("value").contains("*")){
@@ -99,16 +98,14 @@ public class AlperoController {
                             List<WebElement> optionEle = ele.findElements(By.cssSelector("table > tbody > tr:nth-of-type(2) > td > select > option"));
 
                             for(WebElement optionValue : optionEle){
+                            	
                                 if(!optionValue.getAttribute("value").contains("*")){
-                                	optionList += value.getText() + ": " + optionValue.getText();
-                                	if(idx < optionEle.size()) {
-                                		 optionList += ", "; 
-                                	}
-                                	idx++;
+                                	optionList += value.getText() + ": " + optionValue.getText() + ", ";
                                 }
                             }
                         }
                     }
+                    optionList = optionList.substring(0,optionList.length()-2);
                     item.setSele(optionList);
                 }else{
                     List<WebElement> optionEle = ele.findElements(By.cssSelector("table > tbody > tr > td > select > optgroup > option"));
