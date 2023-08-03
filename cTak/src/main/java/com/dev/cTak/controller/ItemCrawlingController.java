@@ -1,9 +1,11 @@
 package com.dev.cTak.controller;
 
-import java.util.List;
-import java.util.Map;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -12,55 +14,70 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.dev.cTak.service.ItemCrawlingService;
-import com.dev.cTak.vo.ItemVo;
 
 @Controller
 public class ItemCrawlingController {
 
-	private final ItemCrawlingService itemCrawlingService;
-	
-	public ItemCrawlingController(ItemCrawlingService itemCrawlingService) {
-		this.itemCrawlingService = itemCrawlingService;
-	}
-	
-	@GetMapping("/crawling")
-	public String crawling(Model model, String url) throws Exception{
-		
-		//url = "https://fromvi.com/product/detail.html?product_no=1194&cate_no=1&display_group=";
-		
-		/**************************************************************************/
-		/**************					START						 **************/
-		
-		Jsoup.connect("https://fromvi.com").get();
-		
-		Connection.Response loginPageResponse = Jsoup.connect("https://fromvi.com/exec/front/Member/login/")
-				.timeout(3000)
-				.data("member_id","alpero1122","member_passwd","pepperlavu0315")
-				.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
-				.method(Connection.Method.POST)
-				.execute();
-		
-		Map<String, String> cookies = loginPageResponse.cookies();
-		Document document = Jsoup.connect(url).cookies(loginPageResponse.cookies()).get();
-		
-        Elements contents = document.select(".infoArea");
-        ItemVo items = new ItemVo();
-		
-        items.setTitle(contents.select("h3").text());
-		items.setPrice1(contents.select("#span_product_price_custom").text());
-		items.setPrice2(contents.select("#span_product_price_text").text());
-		
-		
-		/**************************************************************************/
-		/**************************************************************************/
-		System.out.println(url);
-		System.out.println(items.getTitle());
-		System.out.println(items.getPrice1());
-		//ItemVo itemList = itemCrawlingService.getItemsData();
-		
-		//model.addAttribute("items", itemList);
-		
-		return "items";
-	}
+   private final ItemCrawlingService itemCrawlingService;
+   
+   public ItemCrawlingController(ItemCrawlingService itemCrawlingService) {
+      this.itemCrawlingService = itemCrawlingService;
+   }
+   
+   @GetMapping("/crawling")
+   public String crawling(Model model) throws Exception{
+      /**************************************************************************/
+      /**************               START                   **************/
+      
+      String[] list = {
+    		  "https://www.timemecca.co.kr/product/아페쎄-coezc-h26177-aab-white-oliver-올리버-남성-긴팔티-트랜드메카/56899/category/2570/display/1/",
+    		  "https://www.timemecca.co.kr/product/아페쎄-coezc-h26177-iak-dark-navy-oliver-올리버-남성-긴팔티-트랜드메카/56900/category/2570/display/1/"
+      };
+      String savePath = "D://Downloads//crawling";
+      
+      for(String value : list) {
+         String url = value;
+         Document document = Jsoup.connect(url).timeout(30000).get();
+         Elements contents = document.select(".productDetail");
+
+         String imgEle = contents.select("div:eq(0) img").attr("src");
+         
+         downloadImage(imgEle,savePath);
+         //System.out.println(contents.select("h1").text());
+         
+         //contents = document.select(".thumbnail");
+         //System.out.println(contents.select(".prdList__item:eq(0) a").attr("href"));
+         //System.out.println(contents.select("ul li:eq(1) span").text());
+         
+         
+         //int size = contents.select("ul li").size();
+         //for(int i=0; i<size; i++) {
+             
+             //System.out.print(contents.select("ul li span").text());
+             //System.out.print(">");
+             //System.out.println(contents.select("ul li:eq("+i+") span").text());
+         //}
+
+         //System.out.println("==================================");
+         
+      }
+      
+      return "items";
+   }
+   
+   private static void downloadImage(String imageUrl, String savePath) throws IOException {
+       URL url = new URL(imageUrl);
+       InputStream is = url.openStream();
+       OutputStream os = new FileOutputStream(savePath);
+
+       byte[] b = new byte[2048];
+       int length;
+       while ((length = is.read(b)) != -1) {
+           os.write(b, 0, length);
+       }
+
+       is.close();
+       os.close();
+   }
 }
  

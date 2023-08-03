@@ -121,7 +121,7 @@
 	    </div>
 	    
 	    <div id="listLayer">
-	        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+	        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="padding-right : 3px;">
 	            <tbody>
 	                <tr>
 	                    <th class="th_checkBox th_left center"><input type="checkbox" id="ck_all" autocomplete="off"></th>
@@ -173,7 +173,7 @@
 	    var loadingImg = '';
 	 
 	    loadingImg += "<div id='loadingImg'>";
-	    loadingImg += " <img src='img/loadingBar.gif' style='position: absolute; display: block; margin: 0px auto;'/>";
+	    loadingImg += " <img src='img/loadingBar.gif' style='max-width:80px; position: absolute; display: block; margin: 0px auto;'/>";
 	    loadingImg += "</div>"; 
 	 
 	    $('body')
@@ -280,7 +280,7 @@
 			"white-space" : "normal"
 		});
 		$(".td_option").css({
-			"padding":"10px 0"
+			"padding":"10px"
 		});
 	}	
 	
