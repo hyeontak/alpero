@@ -33,11 +33,11 @@ public class AlperoController {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--no-sandbox");
+        
         WebDriver driver = new ChromeDriver(chromeOptions);
         List<ItemVo> list = new ArrayList<>();
 
         list = web_fromvi(driver);
-
         //map.put("items",web_fromvi(driver));
 
 
@@ -119,12 +119,10 @@ public class AlperoController {
                     	if(idx < optionEle.size()) {
                     		optionList += ", ";
                     	}
-                    	
                     	idx++;
                     }
                     item.setSele(optionList);
                 }
-
                 items.add(cnt, item);
 
                 cnt++;
@@ -144,31 +142,6 @@ public class AlperoController {
 
         return items;
     }
-
-    private static ItemVo web_burberry(WebDriver driver){
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofMinutes(3));
-
-        ItemVo items = new ItemVo();
-
-        try{
-            List<String> list = new ArrayList<>();
-
-            driver.get("https://kr.burberry.com/");
-
-
-
-
-
-
-
-        }catch(TimeoutException e){
-            e.printStackTrace();
-            System.out.println(e.toString());
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println(e.toString());
-        }
-        return items;
-    }
+    
 }
 
