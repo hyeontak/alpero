@@ -16,6 +16,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,210 +39,27 @@ public class ItemCrawlingController {
       /**************               START                   **************/
       
       String[] list = {
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=434524 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=434524 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=434524 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=481662 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=481662 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=481663 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=481663 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=581817 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=581817 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=627696 J4586 8067",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=627698 J8L50 8076",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=629904 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662106 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662106 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662121 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662430 J8191 8488",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702383 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702383 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702386 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702389 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702395 J84W2 9037",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702395 J85H0 8268",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729370 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729383 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729383 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729403 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729403 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729403 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=744562 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=744562 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=744753 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=759354 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=759354 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=461997 08202 8170",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=479231 J8540 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=687118 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=687118 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=502088 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=581809 J8CZ0 9068",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=581842 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=581842 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=603619 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=606641 J4586 8067",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=606711 J8L50 8076",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=629901 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=631761 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662108 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662108 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662110 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662110 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662132 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662429 J8196 8522",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=687118 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702393 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702394 J84W2 9037",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702394 J85H0 8268",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=703649 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=703649 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729363 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729373 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729373 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729402 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729402 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729402 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=744423 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=744545 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=744599 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=745654 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=745654 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=758937 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=758937 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=660070 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=660070 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=152045 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=225985 I19A1 8061",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=325964 J85V5 8062",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=457122 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=457122 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=457127 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=457127 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=457127 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=525690 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=527095 J8F76 8521",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=527095 J8F77 8522",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=581843 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=603608 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=606826 I0H11 8029",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=606826 J85V5 8062",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=607339 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=607339 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=627134 J4586 8067",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=627658 J8L50 8076",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=629827 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=629827 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=629828 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662140 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662177 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662177 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662184 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662188 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662194 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662194 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662194 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662256 J84W2 9037",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662256 J85H0 8268",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662428 J85H0 8268",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=679115 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=679262 I0H11 8029",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=679262 J85V5 8062",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702344 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702376 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702376 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702377 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702379 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702391 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=727729 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=727892 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=727892 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=727892 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729412 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729412 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729412 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729415 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729415 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729458 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729460 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=744971 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=744971 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=745657 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=745696 JAAE4 9090",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=094074 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=094074 09850 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=481678 J8540 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=581830 J8540 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=582017 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=582033 J8CZ0 8062",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=609866 J4586 8067",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=609868 J8L50 8076",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=648604 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=652219 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=652219 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=652219 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662111 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662111 J8502 9000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662115 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662115 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=662427 J85H0 8268",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702380 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702390 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702390 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702691 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=702801 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=704246 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=704246 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729408 J8540 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729408 J8540 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=729408 J8568 9066",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=745649 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=745668 JAAE4 9090",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=748543 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=748543 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=759061 J8500 5702",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=761584 J8500 8000",
-    		  "https://www.gucci.com/kr/ko/st/newsearchpage?searchString=524954 J8500 8000"
-
+    		  "https://www.adidas.co.kr/search?q=HT5760"
       };
 
       
       for(String value : list) {
           String url = value;
           
-          Document document = Jsoup.connect(url).timeout(30000).get();
-          Elements contents = document.select(".SearchResultGrid_productsCellr:eq(0)");
-
+          Document document = Jsoup.connect(url).get();
+          Elements contents = document.select("#glass-gdpr-default-consent-accept-button");
           
+          contents = document.select(".sidebar___29cCJ");
+
           //contents = document.select(".thumbnail");
-          System.out.println(contents.select("a").attr("href"));
+          System.out.println(contents.select(".product-description___1TLpA h1 span").text());
           //System.out.println(contents);
           //System.out.println(contents.select(".item_title > .prName_PrName").text());
           //System.out.println(contents.select("ul li:eq(1) span").text());
       }
 
-
-          //int size = contents.select("ul li").size();
-          //for(int i=0; i<size; i++) {
-              
-              //System.out.print(contents.select("ul li span").text());
-              //System.out.print(">");
-              //System.out.println(contents.select("ul li:eq("+i+") span").text());
-          //}
-
-
-      /*
-       */
-          
       
-      //imageCrawling(list);
-
-      
-      //okMallProductCrawling(list,1);
-      //okMallOptionCrawling(list,5);
-      
-      
-      return "items";
+      return "content/items";
       
    }
    
@@ -283,6 +102,7 @@ public class ItemCrawlingController {
   
     private static void downloadImage(String imageUrl, String savePath) throws IOException {
        URL url = new URL(imageUrl);
+       
        InputStream is = url.openStream();
        
        // 이미지 크기를 가져오기 위해 BufferedImage를 사용합니다.

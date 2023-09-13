@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dev.cTak.mapper.AlperoMapper">
+	<insert id="insertItems" parameterType="com.dev.cTak.vo.ItemVo">
+		INSERT INTO alpero.item(
+			item_code
+			,shop_code
+			,title
+			,price1
+			,price2
+			,optionText
+			,thumbnailLink
+			,detailLink
+			,reg_date
+			,upd_date
+			,usr
+		)VALUES(
+			#{itemCode}
+			,#{shopCode}
+			,#{title}
+			,#{price1}
+			,#{price2}
+			,#{optionText}
+			,#{thumbnailLink}
+			,#{detailLink}
+			,NOW()
+			,NOW()
+			,'admin'
+		)
+	</insert>
+
+	<insert id="insertItemsTemp" parameterType="com.dev.cTak.vo.ItemVo">
+		INSERT INTO alpero.item_update(
+			item_code
+			,shop_code
+			,title
+			,price1
+			,price2
+			,optionText
+			,thumbnailLink
+			,detailLink
+			,reg_date
+			,upd_date
+			,usr
+		)VALUES(
+			#{itemCode}
+			,#{shopCode}
+			,#{title}
+			,#{price1}
+			,#{price2}
+			,#{optionText}
+			,#{thumbnailLink}
+			,#{detailLink}
+			,NOW()
+			,NOW()
+			,'admin'
+		)ON DUPLICATE KEY UPDATE
+			title = #{title}
+			,price1 = #{price1}
+			,price2 = #{price2}
+			,optionText = #{optionText}
+			,thumbnailLink = #{thumbnailLink}
+			,detailLink = #{detailLink}
+			,reg_date = NOW()
+			,upd_date = NOW()
+	</insert>
+	
+	<update id="curDataUpdate" parameterType="com.dev.cTak.vo.ItemVo">
+		UPDATE alpero.item SET
+			<if test="title != null and title != ''">
+				title = #{title}
+			</if>
+			<if test="price1 != null and price1 != ''">
+				,price1 = #{price1} 
+			</if>
+			<if test="price2 != null and price2 != ''">
+				,price2 = #{price2}
+			</if>
+			<if test="optionText != null and optionText != ''">
+				,optionText = #{optionText}
+			</if>
+			<if test="thumbnailLink != null and thumbnailLink != ''">
+				,thumbnailLink = #{thumbnailLink}
+			</if>
+			<if test="detailLink != null and detailLink != ''">
+				,detailLink = #{detailLink}
+			</if>
+			,reg_date = NOW()
+			,upd_date = NOW()
+		WHERE item_code = #{itemCode}	
+	</update>
+	
+	<select id="selectItemList" parameterType="com.dev.cTak.vo.ItemVo" resultType="com.dev.cTak.vo.ItemVo">
+		SELECT
+			item_code as itemCode
+			,shop_code as shopCode
+			,title
+			,price1
+			,price2
+			,optionText
+			,thumbnailLink
+			,detailLink
+			,reg_date as regDate
+			,upd_date as updDate
+			,usr
+		FROM alpero.item
+		WHERE 1=1
+		<if test="itemCode != null and itemCode != ''">
+			AND item_code = #{itemCode}
+		</if>
+		<if test="title != null and title != ''">
+			AND title = #{title}
+		</if>
+	</select>
+
+	<select id="compareList" parameterType="com.dev.cTak.vo.ItemVo" resultType="com.dev.cTak.vo.ItemVo">
+		SELECT 
+			 iu.item_code as itemCode
+			,iu.shop_code as shopCode 
+			,if(it.title = iu.title , '' , iu.title ) as title
+			,if(it.price1 = iu.price1 , '' ,iu.price1 ) as price1  
+			,if(it.price2 = iu.price2 , '' ,iu.price2 ) as price2  
+			,if(it.optionText = iu.optionText , '' ,iu.optionText ) as optionText  
+			,if(it.thumbnailLink = iu.thumbnailLink , '' ,iu.thumbnailLink ) as thumbnailLink  
+			,if(it.detailLink = iu.detailLink , '' ,iu.detailLink ) as detailLink  
+		FROM alpero.item it
+		INNER JOIN alpero.item_update iu 
+			ON it.item_code = iu.item_code
+		WHERE
+			it.title &lt;&gt; iu.title
+				OR it.price1 &lt;&gt; iu.price1
+				OR it.price2 &lt;&gt; iu.price2
+				OR it.optionText &lt;&gt; iu.optionText
+				OR it.thumbnailLink &lt;&gt; iu.thumbnailLink
+				OR it.detailLink &lt;&gt; iu.detailLink
+	</select>
+</mapper>
