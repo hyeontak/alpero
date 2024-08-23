@@ -11,8 +11,11 @@ public class ItemVo {
 	private String title = ""; 			//제목
 	private String price1 = "";			//권장판매가 
 	private String price2 = "";			//도매가 
+	private String alperoCode1 = "";			//알페로코드1 
+	private String alperoCode2 = "";			//알페로코드2 
 	
 	private String optionText = "";			//옵션 종류
+	private String beForeOoptionText = "";			//옵션 종류
 	
 	private String thumbnailLink = ""; 	//썸네일 이미지 경로
 	private String detailLink = ""; 	//상세이미지 경로
@@ -57,6 +60,13 @@ public class ItemVo {
 	public void setOptionText(String optionText) {
 		this.optionText = optionText;
 	}
+	
+	public String getBeForeOoptionText() {
+		return beForeOoptionText;
+	}
+	public void setBeForeOoptionText(String beForeOoptionText) {
+		this.beForeOoptionText = beForeOoptionText;
+	}
 	public String getThumbnailLink() {
 		return thumbnailLink;
 	}
@@ -87,4 +97,17 @@ public class ItemVo {
 	public void setUsr(String usr) {
 		this.usr = usr;
 	}
+	public String getAlperoCode1() {
+		return alperoCode1;
+	}
+	public void setAlperoCode1(String alperoCode1) {
+		this.alperoCode1 = alperoCode1;
+	}
+	public String getAlperoCode2() {
+		return alperoCode2;
+	}
+	public void setAlperoCode2(String alperoCode2) {
+		this.alperoCode2 = alperoCode2;
+	}
+	
 }

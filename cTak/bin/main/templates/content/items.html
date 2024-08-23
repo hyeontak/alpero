@@ -8,7 +8,10 @@
 		<title>Spring Boot</title>
 		<!--/* css */-->
 		<link th:href="@{/css/index.css}" rel="stylesheet" />
+		<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	</th:block>
 	<body>
@@ -136,6 +139,7 @@
 		                <tr>
 		                    <th class="th_checkBox th_left center"><input type="checkbox" id="ck_all" autocomplete="off"></th>
 		                    <th class="th_image th_middle">이미지</th>
+		                    <th class="th_alperoCode th_middle">알페로코드</th>
 		                    <th class="th_gname th_middle">상품명</th>
 		                    <th class="th_priceRec th_middle">권장판매가</th>
 		                    <th class="th_priceOri th_middle">도매가</th>
@@ -164,8 +168,11 @@
 		    </div>
 		</form>
 	  </div>
+	  
 	</body>
 	<script type="text/javascript">
+		var beforeData = null;
+		
 		$(document).ready(function(){
 			
 		})
@@ -210,11 +217,15 @@
 						reDrawingTable(data);
 						
 					}else if(id == "btnSrchKwd"){
+						beforeData = data;
+						
 						drawingTable(data);
+					}else if(id == "btnUpdate"){
+						alert("완료하였습니다.");
 					}
 				},
 				error: function onError(error){
-					
+					alert("에러 발생");
 				}
 			});
 		}
@@ -223,6 +234,7 @@
 			console.log(data.length);
 			
 			alert("변경된 데이터의 갯수는 "+data.length+"개 입니다");
+			
 			data.forEach((value)=>{
 				if(value.title != ""){
 					$("#"+value.itemCode+"_title").text(value.title);
@@ -236,15 +248,33 @@
 					$("#"+value.itemCode+"_price2").text(value.price2);
 					$("#"+value.itemCode+"_price2").css("color","red");
 				}
-				if(value.optiontext != ""){
-					$("#"+value.itemCode+"_optiontext").text(value.optiontext);
-					$("#"+value.itemCode+"_optiontext").css("color","red");
+				if(value.optionText != ""){
+					$("#"+value.itemCode+"_optionText").text(value.optionText);
+					$("#"+value.itemCode+"_optionText").css("color","red");
+					
+					// 툴팁 데이터 속성 추가
+		            $("#"+value.itemCode+"_optionText").attr('data-tooltip', value.optionText);
+
+		            // 마우스 호버 이벤트 처리
+		            $("#"+value.itemCode+"_optionText").hover(function(e) {
+		                var tooltipText = value.beForeOoptionText;
+		                var tooltip = $('<div class="tooltip"></div>').text(tooltipText).appendTo('body');
+		                
+		                $(this).on('mousemove', function(e) {
+		                    tooltip.css({
+		                        top: e.pageY + 10 + 'px',
+		                        left: e.pageX + 10 + 'px'
+		                    });
+		                });
+		            }, function() {
+		                $('.tooltip').remove();
+		            });
 				}
 				if(value.thumbnaillink != ""){
 					$("#"+value.itemCode+"_thumbnaillink").text(value.thumbnaillink);
 					$("#"+value.itemCode+"_thumbnaillink").css("color","red");
 				}
-				if(value.detaillink != ""){
+				if(value.detailLink != ""){
 					$("#"+value.itemCode+"_detailLink").text("변경됨");
 					$("#"+value.itemCode+"_detailLink").css("color","red");
 				}
@@ -304,7 +334,8 @@
 				data:url,
 				contentType: "application/json; charset=utf-8",
 				success: function onData(data){
-					console.log(data);
+					beforeData = data;
+					
 				},
 				error: function onError(error){
 					
@@ -325,11 +356,9 @@
 	        	$("#listLayer tbody").append(innerHtml);
 			}
 			*/
-			$("#listLayer tbody tr:eq(1)").remove();
+			$("#listLayer tbody .newTr").remove();
 			
 			var detailLink = "";
-			
-			
 			
 			for(var i = 0; i<data.length; i++){
 				var innerHtml = "";
@@ -338,17 +367,18 @@
 					detailLink = "-";
 				}
 				
-				innerHtml += '<tr>';
-				innerHtml += '	<td class="td_left center"><input type="checkbox" class="ck" name="ck[]" value="" msg="항목을 선택하세요." autocomplete="off">';
-				innerHtml += '		<input type="hidden" name="" value="" autocomplete="off">';
-				innerHtml += '	</td>';
-				innerHtml += '	<td  class="td_image td_middle center" id="'+data[i].itemCode+'_thumbnailLink"><img src="'+data[i].thumbnailLink+'"></td>';
-				innerHtml += '	<td  class="td_gname td_middle center" id="'+data[i].itemCode+'_title">'+data[i].title+'</td>';
-				innerHtml += '	<td  class="td_priceRec td_middle center" id="'+data[i].itemCode+'_price1">'+data[i].price1+'</td>';
-				innerHtml += '	<td  class="td_priceOri td_middle center" id="'+data[i].itemCode+'_price2">'+data[i].price2+'</td>';
-				innerHtml += '	<td  class="td_option td_middle optionText"id="'+data[i].itemCode+'_optionText">'+data[i].optionText+'</td>';
-				innerHtml += '	<td  class="td_option td_middle" id="'+data[i].itemCode+'_detailLink">'+detailLink+'</td>';
-				innerHtml += '</tr>';
+				innerHtml += "<tr class=\"newTr\">";
+			    innerHtml += "    <td class=\"td_left center\"><input type=\"checkbox\" class=\"ck\" name=\"ck[]\" value=\"\" msg=\"항목을 선택하세요.\" autocomplete=\"off\">";
+			    innerHtml += "        <input type=\"hidden\" name=\"\" value=\"\" autocomplete=\"off\">";
+			    innerHtml += "    </td>";
+			    innerHtml += "    <td class=\"td_image td_middle center mousehover\" id=\"" + data[i].itemCode + "_thumbnailLink\" onClick=\"goPage('" + data[i].itemCode + "','" + data[i].shopCode + "');\"><img src=\"" + data[i].thumbnailLink + "\"></td>";
+			    innerHtml += "    <td class=\"th_alperoCode td_middle center\" id=\"" + data[i].itemCode + "_alperoCode1\">" + (data[i].alperoCode2 == "" ? data[i].alperoCode1 : data[i].alperoCode1+"<br/>"+ data[i].alperoCode2) + "</td>";
+			    innerHtml += "    <td class=\"td_gname td_middle center mousehover\" id=\"" + data[i].itemCode + "_title\" onClick=\"goPage('" + data[i].itemCode + "','"+data[i].shopCode+"');\">" + data[i].title + "</td>";
+			    innerHtml += "    <td class=\"td_priceRec td_middle center\" id=\"" + data[i].itemCode + "_price1\">" + data[i].price1 + "</td>";
+			    innerHtml += "    <td class=\"td_priceOri td_middle center\" id=\"" + data[i].itemCode + "_price2\">" + data[i].price2 + "</td>";
+			    innerHtml += "    <td class=\"td_option td_middle optionText mousehover\" id=\"" + data[i].itemCode + "_optionText\" data-tooltip=\"" + data[i].optionText + "\">" + data[i].optionText + "</td>";
+			    innerHtml += "    <td class=\"td_option td_middle\" id=\"" + data[i].itemCode + "_detailLink\">" + detailLink + "</td>";
+			    innerHtml += "</tr>";
 				
 				$("#listLayer tbody").append(innerHtml);
 			}
@@ -358,6 +388,15 @@
 			hideImage();
 			
 			//$(".optionText:contains('품절')").css("color","red");
+		}
+		
+		function goPage(code, shopCode){
+			console.log(shopCode);
+			if(shopCode == "A0001"){
+				window.open("https://www.fromvi.com/product/detail.html?product_no="+code,"_blank");
+			}else if(shopCode == "A0002"){
+				window.open("https://www.lunatic.co.kr/product/"+code,"_blank");
+			}
 		}
 		
 		/*innerHtml css 적용*/
@@ -395,5 +434,6 @@
 				$("#listLayer .td_image").css("display","");
 			}
 		}
+		
 	</script>
 </html>

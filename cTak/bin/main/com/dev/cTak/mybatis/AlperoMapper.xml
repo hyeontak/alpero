@@ -68,8 +68,9 @@
 	
 	<update id="curDataUpdate" parameterType="com.dev.cTak.vo.ItemVo">
 		UPDATE alpero.item SET
+				item_code = #{itemCode}
 			<if test="title != null and title != ''">
-				title = #{title}
+				,title = #{title}
 			</if>
 			<if test="price1 != null and price1 != ''">
 				,price1 = #{price1} 
@@ -94,6 +95,8 @@
 	<select id="selectItemList" parameterType="com.dev.cTak.vo.ItemVo" resultType="com.dev.cTak.vo.ItemVo">
 		SELECT
 			item_code as itemCode
+			,alpero_code1 as alperoCode1
+			,alpero_code2 as alperoCode2
 			,shop_code as shopCode
 			,title
 			,price1
@@ -112,16 +115,20 @@
 		<if test="title != null and title != ''">
 			AND title = #{title}
 		</if>
+		ORDER BY item_id DESC, alpero_code2 ASC, alpero_code1 ASC
 	</select>
 
 	<select id="compareList" parameterType="com.dev.cTak.vo.ItemVo" resultType="com.dev.cTak.vo.ItemVo">
 		SELECT 
 			 iu.item_code as itemCode
+			,it.alpero_code1 as alperoCode1
+			,it.alpero_code2 as alperoCode2
 			,iu.shop_code as shopCode 
 			,if(it.title = iu.title , '' , iu.title ) as title
 			,if(it.price1 = iu.price1 , '' ,iu.price1 ) as price1  
 			,if(it.price2 = iu.price2 , '' ,iu.price2 ) as price2  
-			,if(it.optionText = iu.optionText , '' ,iu.optionText ) as optionText  
+			,if(it.optionText = iu.optionText , '' ,iu.optionText ) as optionText
+			,if(it.optionText = iu.optionText , '' ,it.optionText ) as beForeOoptionText  
 			,if(it.thumbnailLink = iu.thumbnailLink , '' ,iu.thumbnailLink ) as thumbnailLink  
 			,if(it.detailLink = iu.detailLink , '' ,iu.detailLink ) as detailLink  
 		FROM alpero.item it
@@ -134,5 +141,6 @@
 				OR it.optionText &lt;&gt; iu.optionText
 				OR it.thumbnailLink &lt;&gt; iu.thumbnailLink
 				OR it.detailLink &lt;&gt; iu.detailLink
+		ORDER BY item_id DESC, alpero_code2 ASC, alpero_code1 ASC
 	</select>
 </mapper>

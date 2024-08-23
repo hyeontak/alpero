@@ -246,3 +246,20 @@ select{vertical-align:middle; height:22px;}
 	width:50px;
 	height:50px;
 }
+
+.mousehover{
+	cursor:pointer;
+}
+
+
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    z-index: 1000;
+    white-space: nowrap;
+    pointer-events: none;
+}
